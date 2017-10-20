@@ -1,0 +1,31 @@
+version: '3'
+services:
+  nginx:
+    image: gabrieldeveloper/nginx:latest
+    container_name: nginx_l55
+    ports:
+     - "8880:80"
+    volumes:
+     - ./:/var/www/html
+  php:
+    image: gabrieldeveloper/php:latest
+    container_name: php_l55
+    volumes:
+     - ./:/var/www/html
+    working_dir: /var/www/html
+  redis:
+    image: redis:latest
+    container_name: redis_l55
+  postgres:
+    image: postgres:9.6
+    container_name: postgres_l55
+    environment:
+      POSTGRES_ROOT_PASSWORD: secret
+      POSTGRES_DATABASE: homestead
+      POSTGRES_USER: homestead
+      POSTGRES_PASSWORD: secret
+    volumes:
+     - postgresData:/var/lib/postgresql/data
+
+volumes:
+  postgresData:
